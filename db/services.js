@@ -7,6 +7,8 @@ async function connect() {
 
   const pool = new Pool({
     connectionString,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 30000,
   });
 
   global.connection = pool;
@@ -15,6 +17,9 @@ async function connect() {
 }
 
 const setup = async () => {
+  let retries = 0;
+
+  while (retries < 3) {
     try {
       const client = await connect();
       const query = `
@@ -30,11 +35,18 @@ const setup = async () => {
 
       await client.query(query);
 
-      console.info('Database setup completed')
+      console.info("Database setup completed");
+
+      client.release();
+
+      return 'Database setup completed'
 
     } catch (e) {
       console.error(`Error on create table: ${e}`);
+      retries++;
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     }
+  }
 };
 
 const saveMessage = async (message) => {
@@ -49,8 +61,7 @@ const saveMessage = async (message) => {
         ('${id}', ${type}, ${protocol}, '${utc}', ${status})`
     );
 
-    addLog(JSON.stringify(message), 'messages');
-
+    addLog(JSON.stringify(message), "messages");
   } catch (e) {
     console.error(`Error on save message: ${e}`);
   }
