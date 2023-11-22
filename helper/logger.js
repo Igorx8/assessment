@@ -3,11 +3,10 @@ const path = require("path");
 
 const addLog = (message, context) => {
   try {
-    // create log file if it doesn't exist
     if (!fs.existsSync(path.join(__dirname, "../logs"))) {
       fs.mkdirSync(path.join(__dirname, "../logs"));
     }
-    // create log file if it doesn't exist
+    
     if (!fs.existsSync(path.join(__dirname, `../logs/${context}.json`))) {
       fs.writeFileSync(path.join(__dirname, `../logs/${context}.json`), JSON.stringify([]));
     }
