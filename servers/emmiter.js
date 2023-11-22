@@ -22,7 +22,6 @@ emitterServer.bind(emmiterPort, () => {
 
 setInterval(() => {
   const newMessage = require('../helper/messageGenerator').messageGenerator();
-  console.log(newMessage);
   emitterServer.send(newMessage, listennerPort, apiHost, (err) => {
     if (err) throw err;
     console.log(`Message sent from ${apiHost}:${emmiterPort} \n`);
