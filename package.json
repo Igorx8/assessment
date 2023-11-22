@@ -1,0 +1,19 @@
+{
+  "name": "assessment",
+  "version": "1.0.0",
+  "description": "O projeto deve ser segmentado em duas etapas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:simulation": "node ./servers/emmiter.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "node": "^21.1.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {}
+}
