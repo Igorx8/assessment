@@ -22,8 +22,13 @@ Existem dois servidores nesse sistema, um que recebe e salva os dados, e outro �
 ou
 ``` yarn start ```
 
-para o servidor que recebe os dados, e para o servidor que emite os dados
+para o servidor que recebe os dados
+
+### Passo 4
+Ligar o servidor que emite os dados
 
 ``` npm run start:simulation```
 ou
 ``` yarn start:simulation ```
+
+Por fim a aplicação está rodando, além de salvar no banco, as mensagens também são salvas na pasta de logs.
